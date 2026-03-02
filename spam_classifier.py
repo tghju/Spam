@@ -58,6 +58,18 @@ def compute_features(message, spam_words):
     
     ## YOUR CODE HERE ## 
     
+    # Feature 1: Exclamation marks
+    exclamation_count = normalized.count('!')
+    excl_score = exclamation_count * 0.05
+    excl_score = normalized.count('!!') * 0.25 + excl_score
+    excl_score = min(excl_score, 1.0)
+    features['excl_count'] = excl_score
+
+    # Feature 2: Spam words
+    spam_words = load_spam_words('lists/spam_words.txt')
+    spam_word_count = sum(1 for word in spam_words if word in normalized)
+    features['spam_words'] = min(spam_word_count * 0.1, 1.0)
+
     return features
 
 
@@ -259,13 +271,13 @@ def main():
 
 if __name__ == '__main__':
     # Comment out the main() call to test your feature computations
-    main()
-    #Uncomment this code to test the feature computation on a sample message:
-    # test_message = "Congratulations! You've won a free iPhone. Click here to claim your prize!!!"
-    # spam_words = load_spam_words('lists/spam_words.txt')
-    # features = compute_features(test_message, spam_words)
-    # print("Computed features for test message:")
-    # for feature_name, score in features.items():
-    #     print(f"{feature_name}: {score:.2f}")
+    #main()
+    #Uncomment this code to test the feature computation on a sample message: ("Ctrl" + "/")
+    test_message = "Congratulations! You've won a free iPhone. Click here to claim your prize!!!"
+    spam_words = load_spam_words('lists/spam_words.txt')
+    features = compute_features(test_message, spam_words)
+    print("Computed features for test message:")
+    for feature_name, score in features.items():
+        print(f"{feature_name}: {score:.2f}")
 
 
