@@ -63,7 +63,7 @@ def compute_features(message, spam_words):
     excl_score = exclamation_count * 0.05
     excl_score = normalized.count('!!') * 0.25 + excl_score
     excl_score = min(excl_score, 1.0)
-    features['excl_count'] = excl_score
+    features['excl_ratio'] = excl_score
 
     # Feature 2: Spam words
     spam_words = load_spam_words('lists/spam_words.txt')

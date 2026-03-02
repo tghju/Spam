@@ -11,6 +11,8 @@ FEATURE_WEIGHTS = {
    #TODO: You need to weight your features in this part of the code here.
    ## YOUR CODE HERE ##
    # e.g. 'spam_words': 0.4,
+   'spam_words': 0.6,
+   'excl_ratio': 0.4,
 }
 
 # Punctuation marks that indicate spam when excessive
